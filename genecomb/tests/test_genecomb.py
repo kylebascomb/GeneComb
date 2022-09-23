@@ -1,0 +1,83 @@
+from genecomb.genecomb import GeneComb
+import pytest
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("AGCT", {"A": 1, "C": 1, "G": 1, "T": 1, "X": 0}),
+        ("AAGCCC", {"A": 2, "C": 3, "G": 1, "T": 0, "X": 0}),
+        ("agct", {"A": 0, "C": 0, "G": 0, "T": 0, "X": 4}),
+        ("", {"A": 0, "C": 0, "G": 0, "T": 0, "X": 0}),
+    ],
+)
+def test_base_counter(test_input, expected):
+    gene = GeneComb(test_input)
+    assert gene.base_counter() == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("AGCT", 0.50),
+        ("AAGCCC", 0.67),
+        ("agct", 0),
+        ("", 0),
+        ("AXXG", 0.25),
+        ("ACNGGGNNNTAC", 0.42),
+    ],
+)
+def test_gc_content(test_input, expected):
+    gene = GeneComb(test_input)
+    assert gene.gc_content() == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("AGCT", []),
+        ("AAGCCC", []),
+        ("agct", [[0, 3]]),
+        ("", []),
+        ("AXXG", [[1, 2]]),
+        ("ACNGGGNNNTAC", [[2, 2], [6, 8]]),
+    ],
+)
+def test_non_nucleotide_counter(test_input, expected):
+    gene = GeneComb(test_input)
+    assert gene.non_nucleotide_counter() == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("AGCT", [[0, 3]]),
+        ("AAGCCC", [[2, 3]]),
+        ("agct", []),
+        ("", []),
+        ("AXXG", []),
+        ("ACNGGGNNNTAC", [[9, 10]]),
+        ("AAAATTTT", [[0, 7]]),
+    ],
+)
+def test_palindromes_no_overlap(test_input, expected):
+    gene = GeneComb(test_input)
+    assert gene.find_palindromes() == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("AGCT", [[0, 3]]),
+        ("AAGCCC", [[2, 3]]),
+        ("agct", []),
+        ("", []),
+        ("AXXG", []),
+        ("ACNGGGNNNTAC", [[9, 10]]),
+        ("AAAATTTT", [[0, 7]]),
+    ],
+)
+@pytest.mark.skip()
+def test_palindromes_overlap(test_input, expected):
+    gene = GeneComb(test_input)
+    assert gene.find_palindromes(removeOverlap=True) == expected
