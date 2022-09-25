@@ -154,20 +154,22 @@ def read_fasta(filename):
     with open(filename) as file:
         lines = file.readlines()
         for line in lines:
-            if line[0] == '>' and len(genecomb_list) != 0:
-                genecomb_list.append(current_genecomb)
-                current_genecomb = GeneComb()
             if line[0] == '>':
-                current_genecomb.header += line[:-1]    #omit /n at end of line
+                if len(genecomb_list) != 0:
+                    current_genecomb = GeneComb()
+                genecomb_list.append(current_genecomb)
+                current_genecomb.header += line[:-1] 
             else:
                 current_genecomb.seq += line[:-1]
-        genecomb_list.append(current_genecomb)
     if len(genecomb_list) == 1:
         return genecomb_list[0]
+    elif len(genecomb_list) == 0:
+        return GeneComb()
     else: 
         return genecomb_list
 
             
-
+if __name__ == '__main__':
+    read_fasta('genecomb/tests/fasta_files/all_seqs.fasta')
 
 
