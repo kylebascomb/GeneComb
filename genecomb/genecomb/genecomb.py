@@ -3,7 +3,7 @@ import re
 
 
 class GeneComb:
-    def __init__(self, seq, header):
+    def __init__(self, seq='', header=''):
         self.seq = seq
         self.header = header
 
@@ -154,12 +154,18 @@ def read_fasta(filename):
     with open(filename) as file:
         lines = file.readlines()
         for line in lines:
-            if line[0] == '<' and len(genecomb_list) != 0:
+            if line[0] == '>' and len(genecomb_list) != 0:
                 genecomb_list.append(current_genecomb)
-            if line[0] == '<':
-                current_genecomb.header = line
+                current_genecomb = GeneComb()
+            if line[0] == '>':
+                current_genecomb.header += line[:-1]    #omit /n at end of line
             else:
-                current_genecomb.seq.append(line)
+                current_genecomb.seq += line[:-1]
+        genecomb_list.append(current_genecomb)
+    if len(genecomb_list) == 1:
+        return genecomb_list[0]
+    else: 
+        return genecomb_list
 
             
 
