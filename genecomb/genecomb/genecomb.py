@@ -1,9 +1,11 @@
+from operator import ge
 import re
 
 
 class GeneComb:
-    def __init__(self, seq):
+    def __init__(self, seq, header):
         self.seq = seq
+        self.header = header
 
     def base_counter(self):
         """This function returns count of all bases in a sequence as a dictionary
@@ -143,3 +145,23 @@ class GeneComb:
         if removeOverlap and len(palindromes) != 0:
             return remove_nested_palindromes()
         return palindromes
+
+
+def read_fasta(filename):
+    ''' Reads a .fasta file and returns a list of GeneComb objects. Each object corresponding to each sequence in the file'''
+    genecomb_list = []
+    current_genecomb = GeneComb()
+    with open(filename) as file:
+        lines = file.readlines()
+        for line in lines:
+            if line[0] == '<' and len(genecomb_list) != 0:
+                genecomb_list.append(current_genecomb)
+            if line[0] == '<':
+                current_genecomb.header = line
+            else:
+                current_genecomb.seq.append(line)
+
+            
+
+
+
