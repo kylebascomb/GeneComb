@@ -146,13 +146,13 @@ class GeneComb:
             return remove_nested_palindromes()
         return palindromes
 
-    def write_to_fasta_file(self, filepath, overwrite=False):
+    def write_to_fasta_file(self, filepath, append=False):
         '''Writes the sequence and header to a file in the FASTA format'''
         with open(filepath, 'w') as file:
-            file.write(self.header.join('/n'))
-            for line in self.seq[::80]:
-                file.write(line.join('/n'))
-            file.write('/n')
+            file.write(self.header + '\n')
+            for i in range(0,len(self.seq),80):
+                file.write(self.seq[i:i+80] + '\n')
+            file.write('\n')
             
 
 
