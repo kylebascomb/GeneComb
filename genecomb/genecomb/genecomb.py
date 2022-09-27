@@ -4,8 +4,9 @@ import re
 
 class GeneComb:
     def __init__(self, seq='', header=''):
-        self.seq = seq
+        self.seq = seq.upper()
         self.header = header
+        self.seq_rna = self.get_rna_transcription()
 
     def base_counter(self):
         """This function returns count of all bases in a sequence as a dictionary
@@ -155,19 +156,35 @@ class GeneComb:
             file.write('\n')
     
     def get_rna_transcription(self):
-        '''Returns the transcribed sequence'''
-        #TODO
-        return -1
-    
+        '''Returns the transcribed sequence. Replaces all T's with U's'''
+        return self.seq.replace('T', 'U')
+
     def get_reverse_compliment(self):
         ''' Returns the reverse complement of the sequence'''
-        #TODO
-        return -1
+        reverse = ''
+        for c in reversed(self.seq):
+            reverse += self.get_compliment(c)
+        return reverse
 
     def translate_to_protein(self):
         '''Transcribes to RNA, then Translates to Protein with Amino Acid Bases'''
         #TODO
         return -1
+    
+    def get_compliment(self, character):
+        '''Returns the complimentary nucleotide'''
+        if character == 'A':
+            return 'T'
+        elif character == 'T':
+            return 'A'
+        elif character == 'C':
+            return 'G'
+        elif character == 'G':
+            return 'C'
+        elif character == 'U':
+            return 'A'
+        else:
+            return 'X'
 
     
 

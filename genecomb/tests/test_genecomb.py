@@ -7,8 +7,9 @@ import pytest
     [
         ("AGCT", {"A": 1, "C": 1, "G": 1, "T": 1, "X": 0}),
         ("AAGCCC", {"A": 2, "C": 3, "G": 1, "T": 0, "X": 0}),
-        ("agct", {"A": 0, "C": 0, "G": 0, "T": 0, "X": 4}),
+        ("agct", {"A": 1, "C": 1, "G": 1, "T": 1, "X": 0}),
         ("", {"A": 0, "C": 0, "G": 0, "T": 0, "X": 0}),
+        ("XXXNA", {"A": 1, "C": 0, "G": 0, "T": 0, "X": 4}),
     ],
 )
 def test_base_counter(test_input, expected):
@@ -21,7 +22,7 @@ def test_base_counter(test_input, expected):
     [
         ("AGCT", 0.50),
         ("AAGCCC", 0.67),
-        ("agct", 0),
+        ("agct", 0.5),
         ("", 0),
         ("AXXG", 0.25),
         ("ACNGGGNNNTAC", 0.42),
@@ -37,7 +38,7 @@ def test_gc_content(test_input, expected):
     [
         ("AGCT", []),
         ("AAGCCC", []),
-        ("agct", [[0, 3]]),
+        ("agct", []),
         ("", []),
         ("AXXG", [[1, 2]]),
         ("ACNGGGNNNTAC", [[2, 2], [6, 8]]),
@@ -53,7 +54,7 @@ def test_non_nucleotide_counter(test_input, expected):
     [
         ("AGCT", [[0, 3]]),
         ("AAGCCC", [[2, 3]]),
-        ("agct", []),
+        ("agct", [[0, 3]]),
         ("", []),
         ("AXXG", []),
         ("ACNGGGNNNTAC", [[9, 10]]),
@@ -70,7 +71,7 @@ def test_palindromes_no_overlap(test_input, expected):
     [
         ("AGCT", [[0, 3]]),
         ("AAGCCC", [[2, 3]]),
-        ("agct", []),
+        ("agct", [[0, 3]]),
         ("", []),
         ("AXXG", []),
         ("ACNGGGNNNTAC", [[9, 10]]),
@@ -81,3 +82,20 @@ def test_palindromes_no_overlap(test_input, expected):
 def test_palindromes_overlap(test_input, expected):
     gene = GeneComb(test_input)
     assert gene.find_palindromes(removeOverlap=True) == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("AGCT", 'AGCT'),
+        ("AAGCCC", 'GGGCTT'),
+        ("agct", 'AGCT'),
+        ("", ""),
+        ("AXXG", "CXXT"),
+        ("ACNGGGNNNTAC", "GTAXXXCCCXGT"),
+        ("AAAATTTT", "AAAATTTT"),
+    ],
+)
+def test_reverse_compliment(test_input, expected):
+    gene = GeneComb(test_input)
+    assert gene.get_reverse_compliment() == expected
