@@ -153,7 +153,30 @@ class GeneComb:
             for i in range(0,len(self.seq),80):
                 file.write(self.seq[i:i+80] + '\n')
             file.write('\n')
+    
+    def get_rna_transcription(self):
+        '''Returns the transcribed sequence'''
+        #TODO
+        return -1
+    
+    def get_reverse_compliment(self):
+        ''' Returns the reverse complement of the sequence'''
+        #TODO
+        return -1
+
+    def translate_to_protein(self):
+        '''Transcribes to RNA, then Translates to Protein with Amino Acid Bases'''
+        #TODO
+        return -1
+
+    
+
             
+def count_point_mutations(geneA, geneB):
+    '''Counts the number of point mutations between two sequences of equal length'''
+    #TODO
+    return -1
+
 
 
 
