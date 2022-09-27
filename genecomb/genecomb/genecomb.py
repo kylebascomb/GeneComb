@@ -7,6 +7,73 @@ class GeneComb:
         self.seq = seq.upper()
         self.header = header
         self.seq_rna = self.get_rna_transcription()
+    
+    amino_acid_lookup = {
+        'UUU':'F',
+        'UUC':'F',
+        'UUA':'L',
+        'UUG':'L',
+        'CUU':'L',
+        'CUC':'L',
+        'CUA':'L',
+        'CUG':'L',
+        'AUU':'I',
+        'AUC':'I',
+        'AUA':'I',
+        'AUG':'M',
+        'GUU':'V',
+        'GUC':'V',
+        'GUA':'V',
+        'GUG':'V',
+        'UCU':'S',
+        'UCC':'S',
+        'UCA':'S',
+        'UCG':'S',
+        'CCU':'P',
+        'CCC':'P',
+        'CCA':'P',
+        'CCG':'P',
+        'ACU':'T',
+        'ACC':'T',
+        'ACA':'T',
+        'ACG':'T',
+        'GCU':'A',
+        'GCC':'A',
+        'GCA':'A',
+        'GCG':'A',
+        'UAU':'Y',
+        'UAC':'Y',
+        'UAA':'STOP',
+        'UAG':'STOP',
+        'CAU':'H',
+        'CAC':'H',
+        'CAA':'Q',
+        'CAG':'Q',
+        'AAU':'N',
+        'AAC':'N',
+        'AAA':'K',
+        'AAG':'K',
+        'GAU':'D',
+        'GAC':'D',
+        'GAA':'E',
+        'GAG':'E',
+        'UGU':'C',
+        'UGC':'C',
+        'UGA':'STOP',
+        'UGG':'W',
+        'CGU':'R',
+        'CGC':'R',
+        'CGA':'R',
+        'CGG':'R',
+        'AGU':'S',
+        'AGC':'S',
+        'AGA':'R',
+        'AGG':'R',
+        'GGU':'G',
+        'GGC':'G',
+        'GGA':'G',
+        'GGG':'G',
+    }
 
     def base_counter(self):
         """This function returns count of all bases in a sequence as a dictionary
@@ -185,6 +252,10 @@ class GeneComb:
             return 'A'
         else:
             return 'X'
+
+    
+    def get_amino_acid_base():
+        return -1
 
     
 
