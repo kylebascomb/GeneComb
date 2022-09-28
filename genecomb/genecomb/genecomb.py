@@ -262,6 +262,7 @@ class GeneComb:
             return 'X'
     
     def is_valid_rna_nucleotides(self, nucleotides):
+        '''Returns True if the bases in the sequence are all valid RNA bases. That is: A, C, G, U'''
         for base in nucleotides:
             valid =  base == 'A' or base == 'G' or base == 'U' or base =='C'
             if not valid:
@@ -270,10 +271,14 @@ class GeneComb:
     
 
             
-def count_point_mutations(geneA, geneB):
+def count_point_mutations(gene_a, gene_b):
     '''Counts the number of point mutations between two sequences of equal length'''
-    #TODO
-    return -1
+    class SequenceLengthMismatchException(Exception):
+        '''Exception for sequence lengths mismatching'''
+    if len(gene_a) != len(gene_b):
+        raise SequenceLengthMismatchException("Both genes must be the same length!")
+    return sum(1 for a,b in zip(gene_a, gene_b) if a != b)
+
 
 
 
