@@ -6,7 +6,73 @@ class GeneComb:
     def __init__(self, seq='', header=''):
         self.seq = seq.upper()
         self.header = header
-        self.seq_rna = self.get_rna_transcription()
+    
+    amino_acid_lookup = {
+        'UUU':'F',
+        'UUC':'F',
+        'UUA':'L',
+        'UUG':'L',
+        'CUU':'L',
+        'CUC':'L',
+        'CUA':'L',
+        'CUG':'L',
+        'AUU':'I',
+        'AUC':'I',
+        'AUA':'I',
+        'AUG':'M',
+        'GUU':'V',
+        'GUC':'V',
+        'GUA':'V',
+        'GUG':'V',
+        'UCU':'S',
+        'UCC':'S',
+        'UCA':'S',
+        'UCG':'S',
+        'CCU':'P',
+        'CCC':'P',
+        'CCA':'P',
+        'CCG':'P',
+        'ACU':'T',
+        'ACC':'T',
+        'ACA':'T',
+        'ACG':'T',
+        'GCU':'A',
+        'GCC':'A',
+        'GCA':'A',
+        'GCG':'A',
+        'UAU':'Y',
+        'UAC':'Y',
+        'UAA':'STOP',
+        'UAG':'STOP',
+        'CAU':'H',
+        'CAC':'H',
+        'CAA':'Q',
+        'CAG':'Q',
+        'AAU':'N',
+        'AAC':'N',
+        'AAA':'K',
+        'AAG':'K',
+        'GAU':'D',
+        'GAC':'D',
+        'GAA':'E',
+        'GAG':'E',
+        'UGU':'C',
+        'UGC':'C',
+        'UGA':'STOP',
+        'UGG':'W',
+        'CGU':'R',
+        'CGC':'R',
+        'CGA':'R',
+        'CGG':'R',
+        'AGU':'S',
+        'AGC':'S',
+        'AGA':'R',
+        'AGG':'R',
+        'GGU':'G',
+        'GGC':'G',
+        'GGA':'G',
+        'GGG':'G',
+    }
 
     def base_counter(self):
         """This function returns count of all bases in a sequence as a dictionary
@@ -166,10 +232,19 @@ class GeneComb:
             reverse += self.get_compliment(c)
         return reverse
 
-    def translate_to_protein(self):
+    def translate_to_protein(self, start=0, end = -1):
         '''Transcribes to RNA, then Translates to Protein with Amino Acid Bases'''
-        #TODO
-        return -1
+        seq_rna = self.get_rna_transcription()
+        seq_protein = ''
+        if end == -1 :
+            end = len(seq_rna)
+        for i in range(start, end, 3):
+            nucleotides = seq_rna[i:i+3]
+            if len(nucleotides) == 3 and self.is_valid_rna_nucleotides(nucleotides):
+                seq_protein += (self.amino_acid_lookup[nucleotides])
+            else:
+                return seq_protein
+        return seq_protein
     
     def get_compliment(self, character):
         '''Returns the complimentary nucleotide'''
@@ -185,14 +260,25 @@ class GeneComb:
             return 'A'
         else:
             return 'X'
-
+    
+    def is_valid_rna_nucleotides(self, nucleotides):
+        '''Returns True if the bases in the sequence are all valid RNA bases. That is: A, C, G, U'''
+        for base in nucleotides:
+            valid =  base == 'A' or base == 'G' or base == 'U' or base =='C'
+            if not valid:
+                 return False
+        return True
     
 
             
-def count_point_mutations(geneA, geneB):
+def count_point_mutations(gene_a, gene_b):
     '''Counts the number of point mutations between two sequences of equal length'''
-    #TODO
-    return -1
+    class SequenceLengthMismatchException(Exception):
+        '''Exception for sequence lengths mismatching'''
+    if len(gene_a) != len(gene_b):
+        raise SequenceLengthMismatchException("Both genes must be the same length!")
+    return sum(1 for a,b in zip(gene_a, gene_b) if a != b)
+
 
 
 

@@ -1,4 +1,5 @@
 from genecomb.genecomb import GeneComb
+from genecomb.genecomb import count_point_mutations
 import pytest
 
 
@@ -99,3 +100,44 @@ def test_palindromes_overlap(test_input, expected):
 def test_reverse_compliment(test_input, expected):
     gene = GeneComb(test_input)
     assert gene.get_reverse_compliment() == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("UCC", 'S'),
+        ("UCCGCU", 'SA'),
+        ("UCCGCUAAAGGG", 'SAKG'),
+        ("", ""),
+        ("UCCGCUAAAGGGUAA", "SAKGSTOP"),
+        ("AAAATTTT", "KI"),
+        ("ACNGUU", ""),
+        ("UCCCUN", 'S')
+    ],
+)
+def test_translate_to_protein(test_input, expected):
+    gene = GeneComb(test_input)
+    assert gene.translate_to_protein() == expected
+
+
+@pytest.mark.parametrize(
+    "test_input_a, test_input_b, expected",
+    [
+        ("AGCT","AGCT", 0),
+        ("AGTT","AGCT", 1),
+        ("AA", "GG", 2)
+    ],
+)
+def test_translate_to_protein(test_input_a, test_input_b, expected):
+    assert count_point_mutations(test_input_a, test_input_b) == expected
+
+
+@pytest.mark.parametrize(
+    "test_input_a, test_input_b",
+    [
+        ("AGCTA","AGCT"),
+    ],
+)
+def test_translate_to_protein_length_mismatch(test_input_a, test_input_b):
+    with pytest.raises(Exception):
+        count_point_mutations(test_input_a, test_input_b) 
