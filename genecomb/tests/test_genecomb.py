@@ -99,3 +99,21 @@ def test_palindromes_overlap(test_input, expected):
 def test_reverse_compliment(test_input, expected):
     gene = GeneComb(test_input)
     assert gene.get_reverse_compliment() == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("UCC", 'S'),
+        ("UCCGCU", 'SA'),
+        ("UCCGCUAAAGGG", 'SAKG'),
+        ("", ""),
+        ("UCCGCUAAAGGGUAA", "SAKGSTOP"),
+        ("AAAATTTT", "KI"),
+        ("ACNGUU", ""),
+        ("UCCCUN", 'S')
+    ],
+)
+def test_translate_to_protein(test_input, expected):
+    gene = GeneComb(test_input)
+    assert gene.translate_to_protein() == expected

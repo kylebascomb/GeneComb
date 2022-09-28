@@ -6,7 +6,6 @@ class GeneComb:
     def __init__(self, seq='', header=''):
         self.seq = seq.upper()
         self.header = header
-        self.seq_rna = self.get_rna_transcription()
     
     amino_acid_lookup = {
         'UUU':'F',
@@ -233,10 +232,19 @@ class GeneComb:
             reverse += self.get_compliment(c)
         return reverse
 
-    def translate_to_protein(self):
+    def translate_to_protein(self, start=0, end = -1):
         '''Transcribes to RNA, then Translates to Protein with Amino Acid Bases'''
-        #TODO
-        return -1
+        seq_rna = self.get_rna_transcription()
+        seq_protein = ''
+        if end == -1 :
+            end = len(seq_rna)
+        for i in range(start, end, 3):
+            nucleotides = seq_rna[i:i+3]
+            if len(nucleotides) == 3 and self.is_valid_rna_nucleotides(nucleotides):
+                seq_protein += (self.amino_acid_lookup[nucleotides])
+            else:
+                return seq_protein
+        return seq_protein
     
     def get_compliment(self, character):
         '''Returns the complimentary nucleotide'''
@@ -252,11 +260,13 @@ class GeneComb:
             return 'A'
         else:
             return 'X'
-
     
-    def get_amino_acid_base():
-        return -1
-
+    def is_valid_rna_nucleotides(self, nucleotides):
+        for base in nucleotides:
+            valid =  base == 'A' or base == 'G' or base == 'U' or base =='C'
+            if not valid:
+                 return False
+        return True
     
 
             
