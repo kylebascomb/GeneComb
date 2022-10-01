@@ -213,12 +213,15 @@ class GeneComb:
             return remove_nested_palindromes()
         return palindromes
 
-    def write_to_fasta_file(self, filepath, append=False):
+    def write_to_fasta_file(self, filepath, append=False, line_length=80):
         '''Writes the sequence and header to a file in the FASTA format'''
-        with open(filepath, 'w') as file:
+        write_type = 'w'
+        if append:
+            write_type='a'
+        with open(filepath, write_type) as file:
             file.write(self.header + '\n')
-            for i in range(0,len(self.seq),80):
-                file.write(self.seq[i:i+80] + '\n')
+            for i in range(0,len(self.seq),line_length):
+                file.write(self.seq[i:i+line_length] + '\n')
             file.write('\n')
     
     def get_rna_transcription(self):
