@@ -88,9 +88,9 @@ def test_palindromes_overlap(test_input, expected):
 @pytest.mark.parametrize(
     "test_input, expected",
     [
-        ("AGCT", 'AGCT'),
-        ("AAGCCC", 'GGGCTT'),
-        ("agct", 'AGCT'),
+        ("AGCT", "AGCT"),
+        ("AAGCCC", "GGGCTT"),
+        ("agct", "AGCT"),
         ("", ""),
         ("AXXG", "CXXT"),
         ("ACNGGGNNNTAC", "GTAXXXCCCXGT"),
@@ -105,14 +105,14 @@ def test_reverse_compliment(test_input, expected):
 @pytest.mark.parametrize(
     "test_input, expected",
     [
-        ("UCC", 'S'),
-        ("UCCGCU", 'SA'),
-        ("UCCGCUAAAGGG", 'SAKG'),
+        ("UCC", "S"),
+        ("UCCGCU", "SA"),
+        ("UCCGCUAAAGGG", "SAKG"),
         ("", ""),
         ("UCCGCUAAAGGGUAA", "SAKGSTOP"),
         ("AAAATTTT", "KI"),
         ("ACNGUU", ""),
-        ("UCCCUN", 'S')
+        ("UCCCUN", "S"),
     ],
 )
 def test_translate_to_protein(test_input, expected):
@@ -122,11 +122,7 @@ def test_translate_to_protein(test_input, expected):
 
 @pytest.mark.parametrize(
     "test_input_a, test_input_b, expected",
-    [
-        ("AGCT","AGCT", 0),
-        ("AGTT","AGCT", 1),
-        ("AA", "GG", 2)
-    ],
+    [("AGCT", "AGCT", 0), ("AGTT", "AGCT", 1), ("AA", "GG", 2)],
 )
 def test_translate_to_protein(test_input_a, test_input_b, expected):
     assert count_point_mutations(test_input_a, test_input_b) == expected
@@ -135,9 +131,9 @@ def test_translate_to_protein(test_input_a, test_input_b, expected):
 @pytest.mark.parametrize(
     "test_input_a, test_input_b",
     [
-        ("AGCTA","AGCT"),
+        ("AGCTA", "AGCT"),
     ],
 )
 def test_translate_to_protein_length_mismatch(test_input_a, test_input_b):
     with pytest.raises(Exception):
-        count_point_mutations(test_input_a, test_input_b) 
+        count_point_mutations(test_input_a, test_input_b)

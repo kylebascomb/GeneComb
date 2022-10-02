@@ -3,75 +3,75 @@ import re
 
 
 class GeneComb:
-    def __init__(self, seq='', header=''):
+    def __init__(self, seq="", header=""):
         self.seq = seq.upper()
         self.header = header
-    
+
     amino_acid_lookup = {
-        'UUU':'F',
-        'UUC':'F',
-        'UUA':'L',
-        'UUG':'L',
-        'CUU':'L',
-        'CUC':'L',
-        'CUA':'L',
-        'CUG':'L',
-        'AUU':'I',
-        'AUC':'I',
-        'AUA':'I',
-        'AUG':'M',
-        'GUU':'V',
-        'GUC':'V',
-        'GUA':'V',
-        'GUG':'V',
-        'UCU':'S',
-        'UCC':'S',
-        'UCA':'S',
-        'UCG':'S',
-        'CCU':'P',
-        'CCC':'P',
-        'CCA':'P',
-        'CCG':'P',
-        'ACU':'T',
-        'ACC':'T',
-        'ACA':'T',
-        'ACG':'T',
-        'GCU':'A',
-        'GCC':'A',
-        'GCA':'A',
-        'GCG':'A',
-        'UAU':'Y',
-        'UAC':'Y',
-        'UAA':'STOP',
-        'UAG':'STOP',
-        'CAU':'H',
-        'CAC':'H',
-        'CAA':'Q',
-        'CAG':'Q',
-        'AAU':'N',
-        'AAC':'N',
-        'AAA':'K',
-        'AAG':'K',
-        'GAU':'D',
-        'GAC':'D',
-        'GAA':'E',
-        'GAG':'E',
-        'UGU':'C',
-        'UGC':'C',
-        'UGA':'STOP',
-        'UGG':'W',
-        'CGU':'R',
-        'CGC':'R',
-        'CGA':'R',
-        'CGG':'R',
-        'AGU':'S',
-        'AGC':'S',
-        'AGA':'R',
-        'AGG':'R',
-        'GGU':'G',
-        'GGC':'G',
-        'GGA':'G',
-        'GGG':'G',
+        "UUU": "F",
+        "UUC": "F",
+        "UUA": "L",
+        "UUG": "L",
+        "CUU": "L",
+        "CUC": "L",
+        "CUA": "L",
+        "CUG": "L",
+        "AUU": "I",
+        "AUC": "I",
+        "AUA": "I",
+        "AUG": "M",
+        "GUU": "V",
+        "GUC": "V",
+        "GUA": "V",
+        "GUG": "V",
+        "UCU": "S",
+        "UCC": "S",
+        "UCA": "S",
+        "UCG": "S",
+        "CCU": "P",
+        "CCC": "P",
+        "CCA": "P",
+        "CCG": "P",
+        "ACU": "T",
+        "ACC": "T",
+        "ACA": "T",
+        "ACG": "T",
+        "GCU": "A",
+        "GCC": "A",
+        "GCA": "A",
+        "GCG": "A",
+        "UAU": "Y",
+        "UAC": "Y",
+        "UAA": "STOP",
+        "UAG": "STOP",
+        "CAU": "H",
+        "CAC": "H",
+        "CAA": "Q",
+        "CAG": "Q",
+        "AAU": "N",
+        "AAC": "N",
+        "AAA": "K",
+        "AAG": "K",
+        "GAU": "D",
+        "GAC": "D",
+        "GAA": "E",
+        "GAG": "E",
+        "UGU": "C",
+        "UGC": "C",
+        "UGA": "STOP",
+        "UGG": "W",
+        "CGU": "R",
+        "CGC": "R",
+        "CGA": "R",
+        "CGG": "R",
+        "AGU": "S",
+        "AGC": "S",
+        "AGA": "R",
+        "AGG": "R",
+        "GGU": "G",
+        "GGC": "G",
+        "GGA": "G",
+        "GGG": "G",
     }
 
     def base_counter(self):
@@ -214,100 +214,93 @@ class GeneComb:
         return palindromes
 
     def write_to_fasta_file(self, filepath, append=False, line_length=80):
-        '''Writes the sequence and header to a file in the FASTA format'''
-        write_type = 'w'
+        """Writes the sequence and header to a file in the FASTA format"""
+        write_type = "w"
         if append:
-            write_type='a'
+            write_type = "a"
         with open(filepath, write_type) as file:
-            file.write(self.header + '\n')
-            for i in range(0,len(self.seq),line_length):
-                file.write(self.seq[i:i+line_length] + '\n')
-            file.write('\n')
-    
+            file.write(self.header + "\n")
+            for i in range(0, len(self.seq), line_length):
+                file.write(self.seq[i : i + line_length] + "\n")
+            file.write("\n")
+
     def get_rna_transcription(self):
-        '''Returns the transcribed sequence. Replaces all T's with U's'''
-        return self.seq.replace('T', 'U')
+        """Returns the transcribed sequence. Replaces all T's with U's"""
+        return self.seq.replace("T", "U")
 
     def get_reverse_compliment(self):
-        ''' Returns the reverse complement of the sequence'''
-        reverse = ''
+        """Returns the reverse complement of the sequence"""
+        reverse = ""
         for c in reversed(self.seq):
             reverse += self.get_compliment(c)
         return reverse
 
-    def translate_to_protein(self, start=0, end = -1):
-        '''Transcribes to RNA, then Translates to Protein with Amino Acid Bases'''
+    def translate_to_protein(self, start=0, end=-1):
+        """Transcribes to RNA, then Translates to Protein with Amino Acid Bases"""
         seq_rna = self.get_rna_transcription()
-        seq_protein = ''
-        if end == -1 :
+        seq_protein = ""
+        if end == -1:
             end = len(seq_rna)
         for i in range(start, end, 3):
-            nucleotides = seq_rna[i:i+3]
+            nucleotides = seq_rna[i : i + 3]
             if len(nucleotides) == 3 and self.is_valid_rna_nucleotides(nucleotides):
-                seq_protein += (self.amino_acid_lookup[nucleotides])
+                seq_protein += self.amino_acid_lookup[nucleotides]
             else:
                 return seq_protein
         return seq_protein
-    
-    def get_compliment(self, character):
-        '''Returns the complimentary nucleotide'''
-        if character == 'A':
-            return 'T'
-        elif character == 'T':
-            return 'A'
-        elif character == 'C':
-            return 'G'
-        elif character == 'G':
-            return 'C'
-        elif character == 'U':
-            return 'A'
-        else:
-            return 'X'
-    
-    def is_valid_rna_nucleotides(self, nucleotides):
-        '''Returns True if the bases in the sequence are all valid RNA bases. That is: A, C, G, U'''
-        for base in nucleotides:
-            valid =  base == 'A' or base == 'G' or base == 'U' or base =='C'
-            if not valid:
-                 return False
-        return True
-    
 
-            
+    def get_compliment(self, character):
+        """Returns the complimentary nucleotide"""
+        if character == "A":
+            return "T"
+        elif character == "T":
+            return "A"
+        elif character == "C":
+            return "G"
+        elif character == "G":
+            return "C"
+        elif character == "U":
+            return "A"
+        else:
+            return "X"
+
+    def is_valid_rna_nucleotides(self, nucleotides):
+        """Returns True if the bases in the sequence are all valid RNA bases. That is: A, C, G, U"""
+        for base in nucleotides:
+            valid = base == "A" or base == "G" or base == "U" or base == "C"
+            if not valid:
+                return False
+        return True
+
+
 def count_point_mutations(gene_a, gene_b):
-    '''Counts the number of point mutations between two sequences of equal length'''
+    """Counts the number of point mutations between two sequences of equal length"""
+
     class SequenceLengthMismatchException(Exception):
-        '''Exception for sequence lengths mismatching'''
+        """Exception for sequence lengths mismatching"""
+
     if len(gene_a) != len(gene_b):
         raise SequenceLengthMismatchException("Both genes must be the same length!")
-    return sum(1 for a,b in zip(gene_a, gene_b) if a != b)
-
-
-
+    return sum(1 for a, b in zip(gene_a, gene_b) if a != b)
 
 
 def read_fasta(filename):
-    ''' Reads a .fasta file and returns a list of GeneComb objects. Each object corresponding to each sequence in the file'''
+    """Reads a .fasta file and returns a list of GeneComb objects. Each object corresponding to each sequence in the file"""
     genecomb_list = []
     current_genecomb = GeneComb()
     with open(filename) as file:
         lines = file.readlines()
         for line in lines:
-            if line[0] == '>':
+            if line[0] == ">":
                 if len(genecomb_list) != 0:
                     current_genecomb = GeneComb()
                 genecomb_list.append(current_genecomb)
-                current_genecomb.header += line[:-1] 
+                current_genecomb.header += line[:-1]
             else:
                 current_genecomb.seq += line[:-1]
     if len(genecomb_list) == 1:
         return genecomb_list[0]
     elif len(genecomb_list) == 0:
         return GeneComb()
-    else: 
+    else:
         return genecomb_list
-
-            
-
-
-
