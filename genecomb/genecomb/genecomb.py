@@ -280,7 +280,7 @@ def count_point_mutations(gene_a, gene_b):
         """Exception for sequence lengths mismatching"""
 
     if len(gene_a) != len(gene_b):
-        raise SequenceLengthMismatchException("Both genes must be the same length!")
+        raise SequenceLengthMismatchException("Both genes must be the same length.")
     return sum(1 for a, b in zip(gene_a, gene_b) if a != b)
 
 
