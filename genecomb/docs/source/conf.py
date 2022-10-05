@@ -13,14 +13,17 @@ release = "1.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+import sys
+import os
+sys.path.insert(0, os.path.abspath('../../genecomb'))
 
 extensions = [
-    "myst_parser",
     "sphinx.ext.duration",
     "sphinx.ext.doctest",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
 ]
+
 
 templates_path = ["_templates"]
 exclude_patterns = []

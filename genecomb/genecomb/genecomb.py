@@ -3,6 +3,7 @@ import re
 
 
 class GeneComb:
+    '''Class for performing sequence analysis'''
     def __init__(self, seq="", header=""):
         self.seq = seq.upper()
         self.header = header
@@ -76,11 +77,10 @@ class GeneComb:
 
     def base_counter(self):
         """This function returns count of all bases in a sequence as a dictionary
-        Ex: ACGGGTAC -> {'A': 2, 'C': 2, 'G': 3, 'T': 1}
-        Parameters:
-            seq (str): nucleotide sequence
-        Returns:
-            returns the count of all bases as a dictionary
+        Ex: ACGGGTAC -> {'A': 2, 'C': 2, 'G': 3, 'T': 1, 'X':0}
+
+        :return: The count of all bases as a dictionary
+        :rtype: dict
         """
         base_count = {"A": 0, "C": 0, "G": 0, "T": 0, "X": 0}
 
