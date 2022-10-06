@@ -3,7 +3,13 @@ import re
 
 
 class GeneComb:
-    '''Class for performing sequence analysis'''
+    '''Class for performing sequence analysis
+    
+    :param seq: Nucleotide sequence of the gene
+    :type seq: str
+    :param header: Header/ Description for the seq. Used for FASTA formatting
+    :type header: str
+    '''
     def __init__(self, seq="", header=""):
         self.seq = seq.upper()
         self.header = header
@@ -101,10 +107,9 @@ class GeneComb:
     def gc_content(self):
         """This function returns the GC content of a sequence.
         Ex: If the sequence is 100 bases long and you have 20 C’s and 5 G’s, your GC content is 25%
-        Parameters:
-            seq (str): nucleotide sequence
-        Returns:
-            returns the GC content
+        
+        :return: the GC content of the GeneComb sequence
+        :rtype: float
         """
         base_dict = self.base_counter()
         base_count = len(self.seq)
@@ -122,10 +127,9 @@ class GeneComb:
         """This function parses a sequence and returns a list of the location of each
         non ACGT base and the length of unknown bases if they are consecutive
         Ex: ACNGGGNNNTAC -> [[2, 2],[6, 8]]
-        Parameters:
-            seq (str): nucleotide sequence
-        Returns:
-            returns dictionary in the form of {position: length}
+   
+        :return: dictionary in the form of {position: length}
+        :rtype: dict
         """
         non_nucleotides = []
 
@@ -135,13 +139,13 @@ class GeneComb:
         return non_nucleotides
 
     def find_palindromes(self, removeOverlap=False):
-        """This function parses the sequence and returns a list of palindromic nucleotide sequences
+        """
+        This function parses the sequence and returns a list of palindromic nucleotide sequences
         within the seq.
-        Parameters:
-            seq (str): sequence
-        Returns:
-            Returns a list of all the palindromes. Each entry in the list is another with the start position at index 0
+
+        :return: a list of all the palindromes. Each entry in the list is another with the start position at index 0
             and the end position at index 1
+        :rtype: list[list[start, end]]
         """
 
         palindromes = []

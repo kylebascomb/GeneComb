@@ -64,6 +64,74 @@ Ex: ACGGGTAC -&gt; {‘A’: 2, ‘C’: 2, ‘G’: 3, ‘T’: 1, ‘X’:0}</
 </dd></dl>
 
 </section>
+<section id="calculating-gc-content">
+<h2>Calculating GC Content<a class="headerlink" href="#calculating-gc-content" title="Permalink to this heading">¶</a></h2>
+<p>The GC content of a sequence is the percentage of G’s and C’s in the nucleotide sequence.
+To calculate the GC content of a GeneComb sequence, you can use the
+<code class="docutils literal notranslate"><span class="pre">GeneComb.gc_content</span></code> function:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="genecomb.GeneComb.gc_content">
+<span class="sig-prename descclassname"><span class="pre">genecomb.GeneComb.</span></span><span class="sig-name descname"><span class="pre">gc_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genecomb.GeneComb.gc_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function returns the GC content of a sequence.
+Ex: If the sequence is 100 bases long and you have 20 C’s and 5 G’s, your GC content is 25%</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the GC content of the GeneComb sequence</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="finding-the-number-of-non-nucleotide-bases">
+<h2>Finding the Number of Non-nucleotide Bases<a class="headerlink" href="#finding-the-number-of-non-nucleotide-bases" title="Permalink to this heading">¶</a></h2>
+<p>It can be helpful to know the number of bases in a sequence that are not a valid
+nucleotide (A, C, G, T). You can quickly calculate this value using the
+<code class="docutils literal notranslate"><span class="pre">GeneComb.non_nucleotide_counter</span></code> function:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="genecomb.GeneComb.non_nucleotide_counter">
+<span class="sig-prename descclassname"><span class="pre">genecomb.GeneComb.</span></span><span class="sig-name descname"><span class="pre">non_nucleotide_counter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genecomb.GeneComb.non_nucleotide_counter" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function parses a sequence and returns a list of the location of each
+non ACGT base and the length of unknown bases if they are consecutive
+Ex: ACNGGGNNNTAC -&gt; [[2, 2],[6, 8]]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary in the form of {position: length}</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="finding-all-palindromic-subsequences">
+<h2>Finding all palindromic subsequences<a class="headerlink" href="#finding-all-palindromic-subsequences" title="Permalink to this heading">¶</a></h2>
+<p>A palindromic sequence is a nucleic acid sequence in a double-stranded DNA or RNA molecule whereby reading
+in a certain direction (e.g. 5’ to 3’) on one strand is identical to
+the sequence in the same direction (e.g. 5’ to 3’) on the complementary strand
+<a class="reference external" href="https://en.wikipedia.org/wiki/Palindromic_sequence">[Source]</a>.
+You can calculate all the palindromic sequences using the
+<code class="docutils literal notranslate"><span class="pre">GeneComb.find_palindromes</span></code> function:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="genecomb.GeneComb.find_palindromes">
+<span class="sig-prename descclassname"><span class="pre">genecomb.GeneComb.</span></span><span class="sig-name descname"><span class="pre">find_palindromes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">removeOverlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genecomb.GeneComb.find_palindromes" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function parses the sequence and returns a list of palindromic nucleotide sequences
+within the seq.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a list of all the palindromes. Each entry in the list is another with the start position at index 0
+and the end position at index 1</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[list[start, end]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 </section>
 
 
@@ -88,6 +156,18 @@ Ex: ACGGGTAC -&gt; {‘A’: 2, ‘C’: 2, ‘G’: 3, ‘T’: 1, ‘X’:0}</
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#counting-bases">Counting Bases</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.base_counter"><code class="docutils literal notranslate"><span class="pre">base_counter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calculating-gc-content">Calculating GC Content</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.gc_content"><code class="docutils literal notranslate"><span class="pre">gc_content()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#finding-the-number-of-non-nucleotide-bases">Finding the Number of Non-nucleotide Bases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.non_nucleotide_counter"><code class="docutils literal notranslate"><span class="pre">non_nucleotide_counter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#finding-all-palindromic-subsequences">Finding all palindromic subsequences</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.find_palindromes"><code class="docutils literal notranslate"><span class="pre">find_palindromes()</span></code></a></li>
 </ul>
 </li>
 </ul>
