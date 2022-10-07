@@ -113,6 +113,7 @@ class GeneComb:
         """This function returns the GC content of a sequence.
         Ex: If the sequence is 100 bases long and you have 20 C’s and 5 G’s, your GC content is 25%
 
+        :raise ZeroDivisionError: If sequence is empty
         :return: the GC content of the GeneComb sequence
         :rtype: float
         """
