@@ -132,6 +132,122 @@ and the end position at index 1</p>
 </dd></dl>
 
 </section>
+<section id="transcribing-a-nucleotide-sequence-to-rna">
+<h2>Transcribing a nucleotide sequence to RNA<a class="headerlink" href="#transcribing-a-nucleotide-sequence-to-rna" title="Permalink to this heading">¶</a></h2>
+<p>Transcribing a DNA nucleotide sequence to RNA can be done using the
+<code class="docutils literal notranslate"><span class="pre">GeneComb.get_rna_transcription</span></code> function:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="genecomb.GeneComb.get_rna_transcription">
+<span class="sig-prename descclassname"><span class="pre">genecomb.GeneComb.</span></span><span class="sig-name descname"><span class="pre">get_rna_transcription</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genecomb.GeneComb.get_rna_transcription" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the transcribed sequence. Replaces all T’s with U’s</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The corresponding RNA sequence</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="translating-a-nucleotide-sequence-to-protein-bases">
+<h2>Translating a nucleotide sequence to protein bases<a class="headerlink" href="#translating-a-nucleotide-sequence-to-protein-bases" title="Permalink to this heading">¶</a></h2>
+<p>It can often be helpful to translate your nucleotide sequence into the corresponding protein sequence. This can
+be done using the <code class="docutils literal notranslate"><span class="pre">GeneComb.translate_to_protein</span></code> function:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="genecomb.GeneComb.translate_to_protein">
+<span class="sig-prename descclassname"><span class="pre">genecomb.GeneComb.</span></span><span class="sig-name descname"><span class="pre">translate_to_protein</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genecomb.GeneComb.translate_to_protein" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transcribes to RNA, then Translates to Protein with Amino Acid Bases. It will carry out the tranlsation from start to end;
+or until one of the bases are not a valid rna nucleotide base (A, C, G, U).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>int</em>) – Optional param to designate the starting point of the translation. Defaults to 0.</p></li>
+<li><p><strong>end</strong> (<em>int</em>) – Option param to designate the ending point of the translation. Defaults to the end of the sequence.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The protein sequence from start to end.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="counting-point-mutations-between-two-sequences">
+<h2>Counting Point Mutations between two sequences<a class="headerlink" href="#counting-point-mutations-between-two-sequences" title="Permalink to this heading">¶</a></h2>
+<p>A point mutation is when two sequences that should be identical have a mismatch in a position. This can occur due to mutations
+in a sequence. To count the number of point mutations between two equal length sequences, you can use the
+<code class="docutils literal notranslate"><span class="pre">genecomb.count_point_mutations</span></code> function:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="genecomb.count_point_mutations">
+<span class="sig-prename descclassname"><span class="pre">genecomb.</span></span><span class="sig-name descname"><span class="pre">count_point_mutations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gene_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene_b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genecomb.count_point_mutations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counts the number of point mutations between two sequences of equal length</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gene_a</strong> (<em>str</em>) – sequence A to be compared</p></li>
+<li><p><strong>gene_b</strong> (<em>str</em>) – sequence B to be compared</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>genecomb.SequenceLengthMismatchException</strong> – If sequences are of different length</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of point mutations between two sequences of equal length</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="writing-a-genecomb-sequence-to-a-fasta-file">
+<h2>Writing a GeneComb sequence to a FASTA file<a class="headerlink" href="#writing-a-genecomb-sequence-to-a-fasta-file" title="Permalink to this heading">¶</a></h2>
+<p>You can write a GeneComb nucleotide sequence to a FASTA file with the
+<code class="docutils literal notranslate"><span class="pre">GeneComb.write_to_fasta_file</span></code> function:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="genecomb.GeneComb.write_to_fasta_file">
+<span class="sig-prename descclassname"><span class="pre">genecomb.GeneComb.</span></span><span class="sig-name descname"><span class="pre">write_to_fasta_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genecomb.GeneComb.write_to_fasta_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the sequence and header to a file in the FASTA format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – filepath for the file to write to</p></li>
+<li><p><strong>append</strong> (<em>bool</em>) – Option for appending to an existing file or overwriting. Defaults to false.</p></li>
+<li><p><strong>line_length</strong> (<em>int</em>) – Optional param for the length of the line when writing to file. Defaults to the FASTA standard of 80</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="reading-genecomb-sequences-from-a-fasta-file">
+<h2>Reading GeneComb sequences from a FASTA file<a class="headerlink" href="#reading-genecomb-sequences-from-a-fasta-file" title="Permalink to this heading">¶</a></h2>
+<p>You can read a sequence (or multiple sequences) from a valid FASTA formatted file with the
+<code class="docutils literal notranslate"><span class="pre">genecomb.read_fasta</span></code> function:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="genecomb.read_fasta">
+<span class="sig-prename descclassname"><span class="pre">genecomb.</span></span><span class="sig-name descname"><span class="pre">read_fasta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genecomb.read_fasta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a .fasta file and returns a list of GeneComb objects. Each object corresponding to each sequence in the file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em>) – filepath to read from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Either a single GeneComb object with the sequence in the file, or a list of GeneComb sequences if more than one sequence can be found in the file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>GeneComb or list[GeneComb]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 </section>
 
 
@@ -168,6 +284,26 @@ and the end position at index 1</p>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#finding-all-palindromic-subsequences">Finding all palindromic subsequences</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.find_palindromes"><code class="docutils literal notranslate"><span class="pre">find_palindromes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#transcribing-a-nucleotide-sequence-to-rna">Transcribing a nucleotide sequence to RNA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.get_rna_transcription"><code class="docutils literal notranslate"><span class="pre">get_rna_transcription()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#translating-a-nucleotide-sequence-to-protein-bases">Translating a nucleotide sequence to protein bases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.translate_to_protein"><code class="docutils literal notranslate"><span class="pre">translate_to_protein()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#counting-point-mutations-between-two-sequences">Counting Point Mutations between two sequences</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#genecomb.count_point_mutations"><code class="docutils literal notranslate"><span class="pre">count_point_mutations()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-a-genecomb-sequence-to-a-fasta-file">Writing a GeneComb sequence to a FASTA file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.write_to_fasta_file"><code class="docutils literal notranslate"><span class="pre">write_to_fasta_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-genecomb-sequences-from-a-fasta-file">Reading GeneComb sequences from a FASTA file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#genecomb.read_fasta"><code class="docutils literal notranslate"><span class="pre">read_fasta()</span></code></a></li>
 </ul>
 </li>
 </ul>

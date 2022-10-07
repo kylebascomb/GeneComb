@@ -15,7 +15,8 @@ release = "1.0"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 import sys
 import os
-sys.path.insert(0, os.path.abspath('../../genecomb'))
+
+sys.path.insert(0, os.path.abspath("../../genecomb"))
 
 extensions = [
     "sphinx.ext.duration",

@@ -2,14 +2,19 @@ from operator import ge
 import re
 
 
+class SequenceLengthMismatchException(Exception):
+    """Exception for sequence lengths mismatching"""
+
+
 class GeneComb:
-    '''Class for performing sequence analysis
-    
+    """Class for performing sequence analysis
+
     :param seq: Nucleotide sequence of the gene
     :type seq: str
     :param header: Header/ Description for the seq. Used for FASTA formatting
     :type header: str
-    '''
+    """
+
     def __init__(self, seq="", header=""):
         self.seq = seq.upper()
         self.header = header
@@ -107,7 +112,7 @@ class GeneComb:
     def gc_content(self):
         """This function returns the GC content of a sequence.
         Ex: If the sequence is 100 bases long and you have 20 C’s and 5 G’s, your GC content is 25%
-        
+
         :return: the GC content of the GeneComb sequence
         :rtype: float
         """
@@ -127,7 +132,7 @@ class GeneComb:
         """This function parses a sequence and returns a list of the location of each
         non ACGT base and the length of unknown bases if they are consecutive
         Ex: ACNGGGNNNTAC -> [[2, 2],[6, 8]]
-   
+
         :return: dictionary in the form of {position: length}
         :rtype: dict
         """
@@ -218,7 +223,16 @@ class GeneComb:
         return palindromes
 
     def write_to_fasta_file(self, filepath, append=False, line_length=80):
-        """Writes the sequence and header to a file in the FASTA format"""
+        """
+        Writes the sequence and header to a file in the FASTA format
+
+        :param filepath: filepath for the file to write to
+        :type filepath: str
+        :param append: Option for appending to an existing file or overwriting. Defaults to false.
+        :type append: bool
+        :param line_length: Optional param for the length of the line when writing to file. Defaults to the FASTA standard of 80
+        :type line_length: int
+        """
         write_type = "w"
         if append:
             write_type = "a"
@@ -229,18 +243,37 @@ class GeneComb:
             file.write("\n")
 
     def get_rna_transcription(self):
-        """Returns the transcribed sequence. Replaces all T's with U's"""
+        """Returns the transcribed sequence. Replaces all T's with U's
+
+        :return: The corresponding RNA sequence
+        :rtype: str
+        """
         return self.seq.replace("T", "U")
 
     def get_reverse_compliment(self):
-        """Returns the reverse complement of the sequence"""
+        """
+        Returns the reverse complement
+
+        :return: The reverse complement of the sequence
+        :rtype: str
+        """
         reverse = ""
         for c in reversed(self.seq):
             reverse += self.get_compliment(c)
         return reverse
 
     def translate_to_protein(self, start=0, end=-1):
-        """Transcribes to RNA, then Translates to Protein with Amino Acid Bases"""
+        """
+        Transcribes to RNA, then Translates to Protein with Amino Acid Bases. It will carry out the tranlsation from start to end;
+        or until one of the bases are not a valid rna nucleotide base (A, C, G, U).
+
+        :param start: Optional param to designate the starting point of the translation. Defaults to 0.
+        :type start: int
+        :param end: Option param to designate the ending point of the translation. Defaults to the end of the sequence.
+        :type end: int
+        :return: The protein sequence from start to end.
+        :rtype: str
+        """
         seq_rna = self.get_rna_transcription()
         seq_protein = ""
         if end == -1:
@@ -254,7 +287,14 @@ class GeneComb:
         return seq_protein
 
     def get_compliment(self, character):
-        """Returns the complimentary nucleotide"""
+        """Returns the complimentary nucleotide. A and T are compliments of each other. C and G are also compliments of each other. If U is passed in as
+        a character, then A will be returned.
+
+        :param character: The nucleotide base to find a compliment for:
+        :type character: str
+        :return: Returns the compliment of the character base
+        :rtype: str
+        """
         if character == "A":
             return "T"
         elif character == "T":
@@ -269,7 +309,11 @@ class GeneComb:
             return "X"
 
     def is_valid_rna_nucleotides(self, nucleotides):
-        """Returns True if the bases in the sequence are all valid RNA bases. That is: A, C, G, U"""
+        """Returns True if the bases in the sequence are all valid RNA bases. That is: A, C, G, U
+
+        :return: True if the bases in the sequence are all valid RNA bases. That is: A, C, G, U
+        :rtype: bool
+        """
         for base in nucleotides:
             valid = base == "A" or base == "G" or base == "U" or base == "C"
             if not valid:
@@ -278,21 +322,33 @@ class GeneComb:
 
 
 def count_point_mutations(gene_a, gene_b):
-    """Counts the number of point mutations between two sequences of equal length"""
+    """Counts the number of point mutations between two sequences of equal length
 
-    class SequenceLengthMismatchException(Exception):
-        """Exception for sequence lengths mismatching"""
+    :param gene_a: sequence A to be compared
+    :type gene_a: str
+    :param gene_b: sequence B to be compared
+    :type gene_b: str
+    :raise genecomb.SequenceLengthMismatchException: If sequences are of different length
+    :return: The number of point mutations between two sequences of equal length
+    :rtype: int
+    """
 
     if len(gene_a) != len(gene_b):
         raise SequenceLengthMismatchException("Both genes must be the same length.")
     return sum(1 for a, b in zip(gene_a, gene_b) if a != b)
 
 
-def read_fasta(filename):
-    """Reads a .fasta file and returns a list of GeneComb objects. Each object corresponding to each sequence in the file"""
+def read_fasta(filepath):
+    """Reads a .fasta file and returns a list of GeneComb objects. Each object corresponding to each sequence in the file
+
+    :param filepath: filepath to read from
+    :type filepath: str
+    :return: Either a single GeneComb object with the sequence in the file, or a list of GeneComb sequences if more than one sequence can be found in the file.
+    :rtype: GeneComb or list[GeneComb]
+    """
     genecomb_list = []
     current_genecomb = GeneComb()
-    with open(filename) as file:
+    with open(filepath) as file:
         lines = file.readlines()
         for line in lines:
             if line[0] == ">":

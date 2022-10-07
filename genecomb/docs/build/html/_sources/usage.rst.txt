@@ -48,3 +48,43 @@ You can calculate all the palindromic sequences using the
 
 .. autofunction:: genecomb.GeneComb.find_palindromes
 
+
+Transcribing a nucleotide sequence to RNA
+------------------------------------------
+Transcribing a DNA nucleotide sequence to RNA can be done using the
+``GeneComb.get_rna_transcription`` function:
+
+.. autofunction:: genecomb.GeneComb.get_rna_transcription
+
+
+Translating a nucleotide sequence to protein bases
+---------------------------------------------------
+It can often be helpful to translate your nucleotide sequence into the corresponding protein sequence. This can
+be done using the ``GeneComb.translate_to_protein`` function:
+
+.. autofunction:: genecomb.GeneComb.translate_to_protein
+
+
+Counting Point Mutations between two sequences
+----------------------------------------------
+A point mutation is when two sequences that should be identical have a mismatch in a position. This can occur due to mutations 
+in a sequence. To count the number of point mutations between two equal length sequences, you can use the 
+``genecomb.count_point_mutations`` function:
+
+.. autofunction:: genecomb.count_point_mutations
+
+
+Writing a GeneComb sequence to a FASTA file
+--------------------------------------------
+You can write a GeneComb nucleotide sequence to a FASTA file with the
+``GeneComb.write_to_fasta_file`` function:
+
+.. autofunction:: genecomb.GeneComb.write_to_fasta_file
+
+
+Reading GeneComb sequences from a FASTA file
+---------------------------------------------
+You can read a sequence (or multiple sequences) from a valid FASTA formatted file with the
+``genecomb.read_fasta`` function:
+
+.. autofunction:: genecomb.read_fasta
