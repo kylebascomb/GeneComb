@@ -17,7 +17,6 @@
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="genecomb" href="generated/genecomb.html" />
     <link rel="prev" title="Usage" href="usage.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -37,13 +36,236 @@
             
   <section id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this heading">¶</a></h1>
+<section id="module-genecomb">
+<span id="genecomb"></span><h2>genecomb<a class="headerlink" href="#module-genecomb" title="Permalink to this heading">¶</a></h2>
+<p class="rubric">Functions</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/genecomb.html#module-genecomb" title="genecomb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">genecomb</span></code></a></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#genecomb.count_point_mutations" title="genecomb.count_point_mutations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_point_mutations</span></code></a>(gene_a, gene_b)</p></td>
+<td><p>Counts the number of point mutations between two sequences of equal length</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#genecomb.read_fasta" title="genecomb.read_fasta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_fasta</span></code></a>(filepath)</p></td>
+<td><p>Reads a .fasta file and returns a list of GeneComb objects.</p></td>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Exceptions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SequenceLengthMismatchException</span></code></p></td>
+<td><p>Exception for sequence lengths mismatching</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id1">
+<h2>GeneComb<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="genecomb.GeneComb">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genecomb.</span></span><span class="sig-name descname"><span class="pre">GeneComb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genecomb.GeneComb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for performing sequence analysis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seq</strong> (<em>str</em>) – Nucleotide sequence of the gene</p></li>
+<li><p><strong>header</strong> (<em>str</em>) – Header/ Description for the seq. Used for FASTA formatting</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">base_counter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>This function returns count of all bases in a sequence as a dictionary
+Ex: ACGGGTAC -&gt; {‘A’: 2, ‘C’: 2, ‘G’: 3, ‘T’: 1, ‘X’:0}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The count of all bases as a dictionary</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">gc_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>This function returns the GC content of a sequence.
+Ex: If the sequence is 100 bases long and you have 20 C’s and 5 G’s, your GC content is 25%</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ZeroDivisionError</strong> – If sequence is empty</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the GC content of the GeneComb sequence</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">non_nucleotide_counter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>This function parses a sequence and returns a list of the location of each
+non ACGT base and the length of unknown bases if they are consecutive
+Ex: ACNGGGNNNTAC -&gt; [[2, 2],[6, 8]]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary in the form of {position: length}</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">find_palindromes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">removeOverlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>This function parses the sequence and returns a list of palindromic nucleotide sequences
+within the seq.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a list of all the palindromes. Each entry in the list is another with the start position at index 0
+and the end position at index 1</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[list[start, end]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">write_to_fasta_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Writes the sequence and header to a file in the FASTA format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – filepath for the file to write to</p></li>
+<li><p><strong>append</strong> (<em>bool</em>) – Option for appending to an existing file or overwriting. Defaults to false.</p></li>
+<li><p><strong>line_length</strong> (<em>int</em>) – Optional param for the length of the line when writing to file. Defaults to the FASTA standard of 80</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">get_rna_transcription</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Returns the transcribed sequence. Replaces all T’s with U’s</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The corresponding RNA sequence</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">get_reverse_compliment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Returns the reverse complement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The reverse complement of the sequence</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">translate_to_protein</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Transcribes to RNA, then Translates to Protein with Amino Acid Bases. It will carry out the tranlsation from start to end;
+or until one of the bases are not a valid rna nucleotide base (A, C, G, U).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>int</em>) – Optional param to designate the starting point of the translation. Defaults to 0.</p></li>
+<li><p><strong>end</strong> (<em>int</em>) – Option param to designate the ending point of the translation. Defaults to the end of the sequence.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The protein sequence from start to end.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">get_compliment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">character</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Returns the complimentary nucleotide. A and T are compliments of each other. C and G are also compliments of each other. If U is passed in as
+a character, then A will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>character</strong> (<em>str</em>) – The nucleotide base to find a compliment for:</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the compliment of the character base</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">is_valid_rna_nucleotides</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nucleotides</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Returns True if the bases in the sequence are all valid RNA bases. That is: A, C, G, U</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the bases in the sequence are all valid RNA bases. That is: A, C, G, U</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</dd></dl>
+
+</section>
 </section>
 
 
@@ -66,7 +288,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/genecomb.html">genecomb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-genecomb">genecomb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">GeneComb</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb"><code class="docutils literal notranslate"><span class="pre">GeneComb</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -76,7 +302,6 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="usage.html" title="previous chapter">Usage</a></li>
-      <li>Next: <a href="generated/genecomb.html" title="next chapter">genecomb</a></li>
   </ul></li>
 </ul>
 </div>
