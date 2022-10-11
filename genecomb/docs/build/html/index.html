@@ -17,7 +17,7 @@
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Overview" href="overview.html" />
+    <link rel="next" title="Usage" href="usage.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -46,114 +46,44 @@
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-<section id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h1>
+<p>GeneComb is a simple project aimed to show off some of the simplest sequence analysis techniques in bioinformatics. The main focus
+of the project is to have a simple framework for educational purposes. When I first started learning bioinformatics in undegrad, I was
+overwhelmed with the amount of analysis techniques and complexity of professional sites like NCBI. My aim with GeneComb is to have a simple library
+that students can turn to in order to get them started with the most simple analyses. The goal is to have simple and clean python code with thorough
+documenation so students can read the code and see that getting started as a bioinformatician can be easy!</p>
+<p>The current scope of the project includes:</p>
+<ul class="simple">
+<li><p>Input and output of files formatted in the FASTA standard</p></li>
+<li><p>Transcription and Translation of DNA nucleotide sequences into RNA and Protein sequences</p></li>
+<li><p>Various methods of counting bases</p></li>
+</ul>
+<p>Documentation:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage.html">Usage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#installation">Installation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#counting-bases">Counting Bases</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="usage.html#genecomb.GeneComb.base_counter"><code class="docutils literal notranslate"><span class="pre">base_counter()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#calculating-gc-content">Calculating GC Content</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="usage.html#genecomb.GeneComb.gc_content"><code class="docutils literal notranslate"><span class="pre">gc_content()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#finding-the-number-of-non-nucleotide-bases">Finding the number of Non-nucleotide Bases</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="usage.html#genecomb.GeneComb.non_nucleotide_counter"><code class="docutils literal notranslate"><span class="pre">non_nucleotide_counter()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#finding-all-palindromic-subsequences">Finding all palindromic subsequences</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="usage.html#genecomb.GeneComb.find_palindromes"><code class="docutils literal notranslate"><span class="pre">find_palindromes()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#transcribing-a-nucleotide-sequence-to-rna">Transcribing a nucleotide sequence to RNA</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="usage.html#genecomb.GeneComb.get_rna_transcription"><code class="docutils literal notranslate"><span class="pre">get_rna_transcription()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#translating-a-nucleotide-sequence-to-protein-bases">Translating a nucleotide sequence to protein bases</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="usage.html#genecomb.GeneComb.translate_to_protein"><code class="docutils literal notranslate"><span class="pre">translate_to_protein()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#counting-point-mutations-between-two-sequences">Counting point mutations between two sequences</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="usage.html#genecomb.count_point_mutations"><code class="docutils literal notranslate"><span class="pre">count_point_mutations()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#writing-a-genecomb-sequence-to-a-fasta-file">Writing a GeneComb sequence to a FASTA file</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="usage.html#genecomb.GeneComb.write_to_fasta_file"><code class="docutils literal notranslate"><span class="pre">write_to_fasta_file()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#reading-genecomb-sequences-from-a-fasta-file">Reading GeneComb sequences from a FASTA file</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="usage.html#genecomb.read_fasta"><code class="docutils literal notranslate"><span class="pre">read_fasta()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html">API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#module-genecomb">genecomb</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id1">GeneComb</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api.html#genecomb.GeneComb"><code class="docutils literal notranslate"><span class="pre">GeneComb</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="future_features.html">Future Features</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#counting-bases">Counting Bases</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#genecomb.GeneComb.base_counter"><code class="docutils literal notranslate"><span class="pre">base_counter()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#calculating-gc-content">Calculating GC Content</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#genecomb.GeneComb.gc_content"><code class="docutils literal notranslate"><span class="pre">gc_content()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#finding-the-number-of-non-nucleotide-bases">Finding the number of Non-nucleotide Bases</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#genecomb.GeneComb.non_nucleotide_counter"><code class="docutils literal notranslate"><span class="pre">non_nucleotide_counter()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#finding-all-palindromic-subsequences">Finding all palindromic subsequences</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#genecomb.GeneComb.find_palindromes"><code class="docutils literal notranslate"><span class="pre">find_palindromes()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#transcribing-a-nucleotide-sequence-to-rna">Transcribing a nucleotide sequence to RNA</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#genecomb.GeneComb.get_rna_transcription"><code class="docutils literal notranslate"><span class="pre">get_rna_transcription()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#translating-a-nucleotide-sequence-to-protein-bases">Translating a nucleotide sequence to protein bases</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#genecomb.GeneComb.translate_to_protein"><code class="docutils literal notranslate"><span class="pre">translate_to_protein()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#counting-point-mutations-between-two-sequences">Counting point mutations between two sequences</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#genecomb.count_point_mutations"><code class="docutils literal notranslate"><span class="pre">count_point_mutations()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#writing-a-genecomb-sequence-to-a-fasta-file">Writing a GeneComb sequence to a FASTA file</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#genecomb.GeneComb.write_to_fasta_file"><code class="docutils literal notranslate"><span class="pre">write_to_fasta_file()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#reading-genecomb-sequences-from-a-fasta-file">Reading GeneComb sequences from a FASTA file</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#genecomb.read_fasta"><code class="docutils literal notranslate"><span class="pre">read_fasta()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#counting-bases">Counting Bases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#calculating-gc-content">Calculating GC Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#finding-the-number-of-non-nucleotide-bases">Finding the number of Non-nucleotide Bases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#finding-all-palindromic-subsequences">Finding all palindromic subsequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#transcribing-a-nucleotide-sequence-to-rna">Transcribing a nucleotide sequence to RNA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#translating-a-nucleotide-sequence-to-protein-bases">Translating a nucleotide sequence to protein bases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#counting-point-mutations-between-two-sequences">Counting point mutations between two sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#writing-a-genecomb-sequence-to-a-fasta-file">Writing a GeneComb sequence to a FASTA file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#reading-genecomb-sequences-from-a-fasta-file">Reading GeneComb sequences from a FASTA file</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#module-genecomb">genecomb</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#id1">GeneComb</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#genecomb.GeneComb"><code class="docutils literal notranslate"><span class="pre">GeneComb</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#id1">GeneComb</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="future_features.html">Future Features</a></li>
 </ul>
 </div>
-</section>
 </section>
 
 
@@ -174,7 +104,6 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="future_features.html">Future Features</a></li>
@@ -184,7 +113,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="overview.html" title="next chapter">Overview</a></li>
+      <li>Next: <a href="usage.html" title="next chapter">Usage</a></li>
   </ul></li>
 </ul>
 </div>
