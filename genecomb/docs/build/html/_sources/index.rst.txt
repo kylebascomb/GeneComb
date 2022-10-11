@@ -24,5 +24,7 @@ Contents
 
 .. toctree::
 
+   overview
    usage
    api
+   future_features

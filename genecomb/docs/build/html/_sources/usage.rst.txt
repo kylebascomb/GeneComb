@@ -28,7 +28,7 @@ To calculate the GC content of a GeneComb sequence, you can use the
 .. autofunction:: genecomb.GeneComb.gc_content
 
 
-Finding the Number of Non-nucleotide Bases
+Finding the number of Non-nucleotide Bases
 ------------------------------------------
 It can be helpful to know the number of bases in a sequence that are not a valid 
 nucleotide (A, C, G, T). You can quickly calculate this value using the 
@@ -65,7 +65,7 @@ be done using the ``GeneComb.translate_to_protein`` function:
 .. autofunction:: genecomb.GeneComb.translate_to_protein
 
 
-Counting Point Mutations between two sequences
+Counting point mutations between two sequences
 ----------------------------------------------
 A point mutation is when two sequences that should be identical have a mismatch in a position. This can occur due to mutations 
 in a sequence. To count the number of point mutations between two equal length sequences, you can use the 

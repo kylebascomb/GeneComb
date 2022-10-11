@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API" href="api.html" />
-    <link rel="prev" title="Welcome to genecomb’s documentation!" href="index.html" />
+    <link rel="prev" title="Overview" href="overview.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -89,7 +89,7 @@ Ex: If the sequence is 100 bases long and you have 20 C’s and 5 G’s, your GC
 
 </section>
 <section id="finding-the-number-of-non-nucleotide-bases">
-<h2>Finding the Number of Non-nucleotide Bases<a class="headerlink" href="#finding-the-number-of-non-nucleotide-bases" title="Permalink to this heading">¶</a></h2>
+<h2>Finding the number of Non-nucleotide Bases<a class="headerlink" href="#finding-the-number-of-non-nucleotide-bases" title="Permalink to this heading">¶</a></h2>
 <p>It can be helpful to know the number of bases in a sequence that are not a valid
 nucleotide (A, C, G, T). You can quickly calculate this value using the
 <code class="docutils literal notranslate"><span class="pre">GeneComb.non_nucleotide_counter</span></code> function:</p>
@@ -181,7 +181,7 @@ or until one of the bases are not a valid rna nucleotide base (A, C, G, U).</p>
 
 </section>
 <section id="counting-point-mutations-between-two-sequences">
-<h2>Counting Point Mutations between two sequences<a class="headerlink" href="#counting-point-mutations-between-two-sequences" title="Permalink to this heading">¶</a></h2>
+<h2>Counting point mutations between two sequences<a class="headerlink" href="#counting-point-mutations-between-two-sequences" title="Permalink to this heading">¶</a></h2>
 <p>A point mutation is when two sequences that should be identical have a mismatch in a position. This can occur due to mutations
 in a sequence. To count the number of point mutations between two equal length sequences, you can use the
 <code class="docutils literal notranslate"><span class="pre">genecomb.count_point_mutations</span></code> function:</p>
@@ -245,7 +245,7 @@ in a sequence. To count the number of point mutations between two equal length s
 <dd class="field-even"><p>Either a single GeneComb object with the sequence in the file, or a list of GeneComb sequences if more than one sequence can be found in the file.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>GeneComb or list[GeneComb]</p>
+<dd class="field-odd"><p><a class="reference internal" href="api.html#genecomb.GeneComb" title="genecomb.GeneComb">GeneComb</a> or list[<a class="reference internal" href="api.html#genecomb.GeneComb" title="genecomb.GeneComb">GeneComb</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -271,6 +271,51 @@ in a sequence. To count the number of point mutations between two equal length s
 
 <h3>Navigation</h3>
 <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">Overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#counting-bases">Counting Bases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#genecomb.GeneComb.base_counter"><code class="docutils literal notranslate"><span class="pre">base_counter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#calculating-gc-content">Calculating GC Content</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#genecomb.GeneComb.gc_content"><code class="docutils literal notranslate"><span class="pre">gc_content()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-the-number-of-non-nucleotide-bases">Finding the number of Non-nucleotide Bases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#genecomb.GeneComb.non_nucleotide_counter"><code class="docutils literal notranslate"><span class="pre">non_nucleotide_counter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-all-palindromic-subsequences">Finding all palindromic subsequences</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#genecomb.GeneComb.find_palindromes"><code class="docutils literal notranslate"><span class="pre">find_palindromes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#transcribing-a-nucleotide-sequence-to-rna">Transcribing a nucleotide sequence to RNA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#genecomb.GeneComb.get_rna_transcription"><code class="docutils literal notranslate"><span class="pre">get_rna_transcription()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#translating-a-nucleotide-sequence-to-protein-bases">Translating a nucleotide sequence to protein bases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#genecomb.GeneComb.translate_to_protein"><code class="docutils literal notranslate"><span class="pre">translate_to_protein()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#counting-point-mutations-between-two-sequences">Counting point mutations between two sequences</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#genecomb.count_point_mutations"><code class="docutils literal notranslate"><span class="pre">count_point_mutations()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-a-genecomb-sequence-to-a-fasta-file">Writing a GeneComb sequence to a FASTA file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#genecomb.GeneComb.write_to_fasta_file"><code class="docutils literal notranslate"><span class="pre">write_to_fasta_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-genecomb-sequences-from-a-fasta-file">Reading GeneComb sequences from a FASTA file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#genecomb.read_fasta"><code class="docutils literal notranslate"><span class="pre">read_fasta()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="future_features.html">Future Features</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#counting-bases">Counting Bases</a><ul>
@@ -281,7 +326,7 @@ in a sequence. To count the number of point mutations between two equal length s
 <li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.gc_content"><code class="docutils literal notranslate"><span class="pre">gc_content()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#finding-the-number-of-non-nucleotide-bases">Finding the Number of Non-nucleotide Bases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#finding-the-number-of-non-nucleotide-bases">Finding the number of Non-nucleotide Bases</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.non_nucleotide_counter"><code class="docutils literal notranslate"><span class="pre">non_nucleotide_counter()</span></code></a></li>
 </ul>
 </li>
@@ -297,7 +342,7 @@ in a sequence. To count the number of point mutations between two equal length s
 <li class="toctree-l3"><a class="reference internal" href="#genecomb.GeneComb.translate_to_protein"><code class="docutils literal notranslate"><span class="pre">translate_to_protein()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#counting-point-mutations-between-two-sequences">Counting Point Mutations between two sequences</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#counting-point-mutations-between-two-sequences">Counting point mutations between two sequences</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#genecomb.count_point_mutations"><code class="docutils literal notranslate"><span class="pre">count_point_mutations()</span></code></a></li>
 </ul>
 </li>
@@ -312,14 +357,17 @@ in a sequence. To count the number of point mutations between two equal length s
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="future_features.html">Future Features</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to genecomb’s documentation!</a></li>
+  <li><a href="overview.html">Overview</a><ul>
+      <li>Previous: <a href="overview.html" title="previous chapter">Overview</a></li>
       <li>Next: <a href="api.html" title="next chapter">API</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
